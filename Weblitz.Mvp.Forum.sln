@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weblitz.Mvp.Forum.Web", "Weblitz.Mvp.Forum.Web\Weblitz.Mvp.Forum.Web.csproj", "{778E2D0E-F375-464A-B5D2-685801215D09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{FC93573C-4DB6-4741-AFD9-876840F2BDD4}"
+	ProjectSection(SolutionItems) = preProject
+		README = README
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{778E2D0E-F375-464A-B5D2-685801215D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{778E2D0E-F375-464A-B5D2-685801215D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{778E2D0E-F375-464A-B5D2-685801215D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{778E2D0E-F375-464A-B5D2-685801215D09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,11 @@
+*.user
+
+*.cache
+
+*.suo
+
+_ReSharper.Weblitz.Mvp.Forum
+
+**/bin
+
+**/obj
