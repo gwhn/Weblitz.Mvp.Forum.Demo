@@ -37,7 +37,7 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            new ForumPresenter(this, new ForumProvider());
+            new ForumListPresenter(this, new ForumProvider());
         }
 
         protected void NewForumLinkButton_OnClick(object sender, EventArgs e)
