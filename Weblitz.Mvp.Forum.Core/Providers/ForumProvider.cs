@@ -8,7 +8,7 @@ namespace Weblitz.Mvp.Forum.Core.Providers
     {
         public IEnumerable<IForumDisplay> List()
         {
-            return new List<IForumDisplay> {new ForumDisplay {Name = "First Feature Forum"}};
+            return new List<IForumDisplay> {new ForumDisplay {Id = 321, Name = "First Feature Forum"}};
         }
     }
 }

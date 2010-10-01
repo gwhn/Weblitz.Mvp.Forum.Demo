@@ -11,7 +11,7 @@
         <asp:Repeater ID="ForumRepeater" runat="server" OnItemDataBound="ForumRepeater_OnItemDataBound">
             <ItemTemplate>
                 <div class="forum item">
-                    <asp:HyperLink ID="NameHyperLink" runat="server" CssClass="name"/>
+                    <asp:LinkButton ID="NameLinkButton" runat="server" CssClass="name" OnCommand="NameLinkButton_OnCommand"/>
                     <asp:Label ID="TopicCountLabel" runat="server" CssClass="count"/>
                     <asp:Label ID="PostCountLabel" runat="server" CssClass="count"/>
                 </div>

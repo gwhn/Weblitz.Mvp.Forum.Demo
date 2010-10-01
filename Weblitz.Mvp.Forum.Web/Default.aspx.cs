@@ -31,7 +31,8 @@ namespace Weblitz.Mvp.Forum.Web
 
         public void GoToForumItem(int id)
         {
-            Response.Redirect("~/ShowForum.aspx");
+            var url = string.Format("~/ShowForum.aspx?Id={0}", id);
+            Response.Redirect(url);
         }
 
         protected void Page_Init(object sender, EventArgs e)
@@ -51,10 +52,19 @@ namespace Weblitz.Mvp.Forum.Web
             var data = e.Item.DataItem as IForumDisplay;
             if (data == null) 
                 return;
-            var nameLink = e.Item.FindControl("NameHyperLink") as HyperLink;
+            var nameLink = e.Item.FindControl("NameLinkButton") as LinkButton;
             if (nameLink != null)
+            {
                 nameLink.Text = data.Name;
-            
+                nameLink.CommandArgument = data.Id.ToString();
+            }
+        }
+
+        protected void NameLinkButton_OnCommand(object sender, CommandEventArgs e)
+        {
+            int id;
+            if (!int.TryParse(e.CommandArgument.ToString(), out id)) return;
+            Show(this, new IdEventArgs{ Id = id});
         }
     }
 }
