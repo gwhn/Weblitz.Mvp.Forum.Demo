@@ -76,5 +76,30 @@ namespace Weblitz.Mvp.Forum.Tests
                            });
         }
 
+        [Test]
+        public void ShouldGoToEmptyForumFormOnNew()
+        {
+            var view = _repository.DynamicMock<IForumListView>();
+            var provider = _repository.DynamicMock<IForumProvider>();
+            var loader = default(IEventRaiser);
+            var newer = default(IEventRaiser);
+            With.Mocks(_repository).
+                ExpectingInSameOrder(() =>
+                                         {
+                                             view.Load += null;
+                                             loader = LastCall.IgnoreArguments().GetEventRaiser();
+                                             view.New += null;
+                                             newer = LastCall.IgnoreArguments().GetEventRaiser();
+                                             Expect.Call(view.IsPostBack).Return(true);
+                                             Expect.Call(view.GoToForumForm);
+                                         }).
+                Verify(() =>
+                           {
+                               new ForumPresenter(view, provider);
+                               loader.Raise(null, new EventArgs());
+                               newer.Raise(null, new EventArgs());
+                           });
+        }
+
     }
 }

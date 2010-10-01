@@ -13,14 +13,27 @@ namespace Weblitz.Mvp.Forum.Web
 {
     public partial class _Default : System.Web.UI.Page, IForumListView
     {
-        protected void Page_Init(object sender, EventArgs e)
-        {
-            new ForumPresenter(this, new ForumProvider());
-        }
         public IEnumerable<IForumDisplay> Forums
         {
             get { return (IEnumerable<IForumDisplay>)ForumRepeater.DataSource; }
             set { ForumRepeater.DataSource = value; }
+        }
+
+        public event EventHandler New;
+
+        public void GoToForumForm()
+        {
+            Response.Redirect("~/ForumForm.aspx");
+        }
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            new ForumPresenter(this, new ForumProvider());
+        }
+
+        protected void NewForumLinkButton_OnClick(object sender, EventArgs e)
+        {
+            New(this, e);
         }
 
         protected void ForumRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
