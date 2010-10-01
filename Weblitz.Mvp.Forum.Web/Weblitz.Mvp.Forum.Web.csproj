@@ -131,6 +131,12 @@
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Weblitz.Mvp.Forum.Core\Weblitz.Mvp.Forum.Core.csproj">
+      <Project>{3EEB406E-B9B8-485F-9961-8F8D4C1B329C}</Project>
+      <Name>Weblitz.Mvp.Forum.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
