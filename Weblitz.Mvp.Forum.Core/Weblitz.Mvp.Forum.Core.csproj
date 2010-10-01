@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdEventArgs.cs" />
     <Compile Include="Models\ForumDisplay.cs" />
     <Compile Include="Models\IForumDisplay.cs" />
     <Compile Include="Presenters\ForumPresenter.cs" />

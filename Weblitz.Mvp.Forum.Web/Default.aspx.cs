@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Weblitz.Mvp.Forum.Core;
 using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Presenters;
 using Weblitz.Mvp.Forum.Core.Providers;
@@ -19,11 +20,18 @@ namespace Weblitz.Mvp.Forum.Web
             set { ForumRepeater.DataSource = value; }
         }
 
+        public event EventHandler<IdEventArgs> Show;
+
         public event EventHandler New;
 
         public void GoToForumForm()
         {
             Response.Redirect("~/ForumForm.aspx");
+        }
+
+        public void GoToForumItem(int id)
+        {
+            Response.Redirect("~/ShowForum.aspx");
         }
 
         protected void Page_Init(object sender, EventArgs e)

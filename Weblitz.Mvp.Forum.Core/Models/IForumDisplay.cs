@@ -2,6 +2,7 @@
 {
     public interface IForumDisplay
     {
+        int Id { get; }
         string Name { get; }
     }
 }

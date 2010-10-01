@@ -16,7 +16,13 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 
             _view.Load += Load;
             _view.New += New;
+            _view.Show += Show;
 
+        }
+
+        private void Show(object sender, IdEventArgs e)
+        {
+            _view.GoToForumItem(e.Id);
         }
 
         private void New(object sender, EventArgs e)
