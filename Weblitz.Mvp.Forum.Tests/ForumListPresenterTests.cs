@@ -36,7 +36,7 @@ namespace Weblitz.Mvp.Forum.Tests
                                              view.Load += null;
                                              loader = LastCall.IgnoreArguments().GetEventRaiser();
                                              Expect.Call(view.IsPostBack).Return(false);
-                                             Expect.Call(() => view.Forums = data);
+                                             Expect.Call(view.Forums = data);
                                              Expect.Call(view.DataBind);
                                              SetupResult.For(view.Forums).Return(data);
                                          }).
@@ -44,7 +44,7 @@ namespace Weblitz.Mvp.Forum.Tests
                            {
                                new ForumListPresenter(view, provider);
                                loader.Raise(null, new EventArgs());
-                               Assert.IsNull(data);
+                               Assert.IsNull(view.Forums);
                                Assert.AreEqual(data, view.Forums);
                            });
         }
@@ -63,7 +63,7 @@ namespace Weblitz.Mvp.Forum.Tests
                                              loader = LastCall.IgnoreArguments().GetEventRaiser();
                                              Expect.Call(view.IsPostBack).Return(false);
                                              Expect.Call(provider.List()).Return(data);
-                                             Expect.Call(() => view.Forums = data);
+                                             Expect.Call(view.Forums = data);
                                              Expect.Call(view.DataBind);
                                              SetupResult.For(view.Forums).Return(data);
                                          }).
@@ -71,7 +71,7 @@ namespace Weblitz.Mvp.Forum.Tests
                            {
                                new ForumListPresenter(view, provider);
                                loader.Raise(null, new EventArgs());
-                               Assert.IsNotNull(data);
+                               Assert.IsNotNull(view.Forums);
                                Assert.AreEqual(data.Count, view.Forums.ToList().Count);
                            });
         }
