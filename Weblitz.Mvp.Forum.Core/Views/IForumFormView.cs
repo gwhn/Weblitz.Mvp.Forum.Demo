@@ -9,5 +9,6 @@ namespace Weblitz.Mvp.Forum.Core.Views
         int CurrentId { get; }
         event EventHandler Create;
         void GoToShowForum(int id);
+        event EventHandler<IdEventArgs> Update;
     }
 }

@@ -9,7 +9,7 @@
            <dd><asp:TextBox ID="NameTextBox" runat="server"/></dd> 
         </dl>
         <div class="options">
-            <asp:Button ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_OnClick" />
+            <asp:Button ID="SubmitButton" runat="server" Text="Submit" OnCommand="SubmitButton_OnCommand" />
         </div>
     </fieldset>
     </div>

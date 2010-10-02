@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Weblitz.Mvp.Forum.Core;
 using Weblitz.Mvp.Forum.Core.Extensions;
 using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Presenters;
@@ -16,8 +17,12 @@ namespace Weblitz.Mvp.Forum.Web
     {
         public IForumInput Forum
         {
-            get { return new ForumInput { Name = NameTextBox.Text.Trim() }; }
-            set { NameTextBox.Text = value.Name; }
+            get { return new ForumInput {Id = SubmitButton.CommandArgument.ToId(), Name = NameTextBox.Text.Trim()}; }
+            set
+            {
+                NameTextBox.Text = value.Name;
+                SubmitButton.CommandArgument = value.Id.ToString();
+            }
         }
 
         public int CurrentId
@@ -32,15 +37,20 @@ namespace Weblitz.Mvp.Forum.Web
             Response.Redirect(string.Format("~/ShowForum.aspx?Id={0}", id));
         }
 
+        public event EventHandler<IdEventArgs> Update;
+
         protected void Page_Init(object sender, EventArgs e)
         {
             new ForumFormPresenter(this, new ForumProvider());
         }
 
-        protected void SubmitButton_OnClick(object sender, EventArgs e)
+        protected void SubmitButton_OnCommand(object sender, CommandEventArgs e)
         {
-            Create(this, e);
+            var id = e.CommandArgument.ToString().ToId();
+            if (id > 0)
+                Update(this, new IdEventArgs{Id = id});
+            else
+                Create(this, e);                
         }
-
     }
 }

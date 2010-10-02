@@ -22,5 +22,10 @@ namespace Weblitz.Mvp.Forum.Core.Providers
         {
             return new ForumDisplay {Id = id, Name = "Fetched Forum by Id"};
         }
+
+        public bool Update(IForumInput forum)
+        {
+            return true;
+        }
     }
 }

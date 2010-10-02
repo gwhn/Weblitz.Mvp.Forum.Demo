@@ -17,6 +17,17 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 
             _view.Load += Load;
             _view.Create += Create;
+            _view.Update += Update;
+        }
+
+        private void Update(object sender, IdEventArgs e)
+        {
+            if (!_view.IsValid)
+                return;
+            if (_provider.Update(_view.Forum))
+            {
+                _view.GoToShowForum(e.Id);
+            }
         }
 
         private void Create(object sender, EventArgs e)
@@ -37,7 +48,7 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
             if (id > 0)
             {
                 var display = _provider.Get(id);
-                _view.Forum = new ForumInput {Name = display.Name};
+                _view.Forum = new ForumInput {Id = id, Name = display.Name};
             }
             else
             {

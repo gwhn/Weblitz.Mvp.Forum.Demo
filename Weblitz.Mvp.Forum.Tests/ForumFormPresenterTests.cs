@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
+using Weblitz.Mvp.Forum.Core;
 using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Presenters;
 using Weblitz.Mvp.Forum.Core.Providers;
@@ -49,13 +50,13 @@ namespace Weblitz.Mvp.Forum.Tests
         }
 
         [Test]
-        public void ShouldGoToShowForumOnCreateNewForum()
+        public void ShouldGoToShowForumOnCreateWithNoId()
         {
             var view = _repository.DynamicMock<IForumFormView>();
             var provider = _repository.DynamicMock<IForumProvider>();
             var loader = default(IEventRaiser);
             var creator = default(IEventRaiser);
-            var data = new ForumInput { Name = "New Forum"};
+            var data = new ForumInput {Name = "New Forum"};
             var newId = 321;
             With.Mocks(_repository).
                 ExpectingInSameOrder(() =>
@@ -85,7 +86,7 @@ namespace Weblitz.Mvp.Forum.Tests
             var provider = _repository.DynamicMock<IForumProvider>();
             var loader = default(IEventRaiser);
             var id = 1423;
-            var display = new ForumDisplay{Id = id, Name = "Populated Forum"};
+            var display = new ForumDisplay {Id = id, Name = "Populated Forum"};
             var input = new ForumInput {Name = display.Name};
             With.Mocks(_repository).
                 ExpectingInSameOrder(() =>
@@ -109,5 +110,34 @@ namespace Weblitz.Mvp.Forum.Tests
                            });
         }
 
+        [Test]
+        public void ShouldGoToShowForumOnUpdateWithId()
+        {
+            var view = _repository.DynamicMock<IForumFormView>();
+            var provider = _repository.DynamicMock<IForumProvider>();
+            var loader = default(IEventRaiser);
+            var updater = default(IEventRaiser);
+            var id = 3124;
+            var data = new ForumInput {Id = id, Name = "Updated Forum"};
+            With.Mocks(_repository).
+                ExpectingInSameOrder(() =>
+                                         {
+                                             view.Load += null;
+                                             loader = LastCall.IgnoreArguments().GetEventRaiser();
+                                             view.Update += null;
+                                             updater = LastCall.IgnoreArguments().GetEventRaiser();
+                                             Expect.Call(view.IsPostBack).Return(true);
+                                             Expect.Call(view.IsValid).Return(true);
+                                             Expect.Call(view.Forum).Return(data);
+                                             Expect.Call(provider.Update(data)).IgnoreArguments().Return(true);
+                                             Expect.Call(() => view.GoToShowForum(id));
+                                         }).
+                Verify(() =>
+                           {
+                               new ForumFormPresenter(view, provider);
+                               loader.Raise(null, new EventArgs());
+                               updater.Raise(null, new IdEventArgs {Id = id});
+                           });
+        }
     }
 }
