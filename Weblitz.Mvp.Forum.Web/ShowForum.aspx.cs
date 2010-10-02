@@ -4,14 +4,53 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Weblitz.Mvp.Forum.Core;
+using Weblitz.Mvp.Forum.Core.Models;
+using Weblitz.Mvp.Forum.Core.Presenters;
+using Weblitz.Mvp.Forum.Core.Providers;
+using Weblitz.Mvp.Forum.Core.Views;
 
 namespace Weblitz.Mvp.Forum.Web
 {
-    public partial class ShowForum : System.Web.UI.Page
+    public partial class ShowForum : System.Web.UI.Page, IForumItemView
     {
-        protected void Page_Load(object sender, EventArgs e)
+        public IForumDisplay Forum
         {
+            get { return new ForumDisplay {Id = IdFrom(EditButton.CommandArgument)}; }
+            set
+            {
+                NameLabel.Text = value.Name;
+                EditButton.CommandArgument = value.Id.ToString();
+            }
+        }
 
+        public int CurrentId
+        {
+            get { return IdFrom(Request["Id"]); }
+        }
+
+        public event EventHandler<IdEventArgs> Edit;
+
+        public void GoToForumForm(int id)
+        {
+            Response.Redirect(string.Format("~/ForumForm.aspx?Id={0}", id));
+        }
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            new ForumItemPresenter(this, new ForumProvider());
+        }
+
+        protected void EditButton_OnCommand(object sender, CommandEventArgs e)
+        {
+            Edit(this, new IdEventArgs {Id = IdFrom(e.CommandArgument.ToString())});
+        }
+
+        private static int IdFrom(string source)
+        {
+            int id;
+            int.TryParse(source, out id);
+            return id;
         }
     }
 }

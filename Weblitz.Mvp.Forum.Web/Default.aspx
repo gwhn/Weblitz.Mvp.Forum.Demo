@@ -7,7 +7,7 @@
     <h2>
         Forums
     </h2>
-    <div class="forums list">
+    <div class="forum list">
         <asp:Repeater ID="ForumRepeater" runat="server" OnItemDataBound="ForumRepeater_OnItemDataBound">
             <ItemTemplate>
                 <div class="forum item">

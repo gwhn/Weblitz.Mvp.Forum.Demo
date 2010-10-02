@@ -20,7 +20,7 @@ namespace Weblitz.Mvp.Forum.Core.Providers
 
         public IForumDisplay Get(int id)
         {
-            throw new NotImplementedException();
+            return new ForumDisplay {Id = id, Name = "Fetched Forum by Id"};
         }
     }
 }

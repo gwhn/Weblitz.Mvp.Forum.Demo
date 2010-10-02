@@ -2,4 +2,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="forum item">
+        <dl>
+            <dt>Name</dt>
+            <dd><asp:Label ID="NameLabel" runat="server"/></dd>
+        </dl>
+        <div class="options">
+            <asp:Button ID="EditButton" runat="server" Text="Edit" OnCommand="EditButton_OnCommand" />
+        </div>
+    </div>
 </asp:Content>
