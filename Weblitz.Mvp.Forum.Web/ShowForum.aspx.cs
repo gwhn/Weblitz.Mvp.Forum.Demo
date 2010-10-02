@@ -37,14 +37,29 @@ namespace Weblitz.Mvp.Forum.Web
             Response.Redirect(string.Format("~/ForumForm.aspx?Id={0}", id));
         }
 
+        public event EventHandler<IdEventArgs> Delete;
+
+        public void GoToForumList()
+        {
+            Response.Redirect("~/Default.aspx");
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
             new ForumItemPresenter(this, new ForumProvider());
         }
 
-        protected void EditButton_OnCommand(object sender, CommandEventArgs e)
+        protected void OptionsButton_OnCommand(object sender, CommandEventArgs e)
         {
-            Edit(this, new IdEventArgs {Id = e.CommandArgument.ToString().ToId()});
+            switch (e.CommandName)
+            {
+                case "Edit":
+                    Edit(this, new IdEventArgs { Id = e.CommandArgument.ToString().ToId() });
+                    break;
+                case "Delete":
+                    Delete(this, new IdEventArgs { Id = e.CommandArgument.ToString().ToId() });
+                    break;
+            }
         }
     }
 }

@@ -16,6 +16,15 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 
             _view.Load += Load;
             _view.Edit += Edit;
+            _view.Delete += Delete;
+        }
+
+        private void Delete(object sender, IdEventArgs e)
+        {
+            if (_provider.Delete(e.Id))
+            {
+                _view.GoToForumList();
+            }
         }
 
         private void Edit(object sender, IdEventArgs e)

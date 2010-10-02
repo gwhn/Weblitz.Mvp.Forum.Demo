@@ -27,5 +27,10 @@ namespace Weblitz.Mvp.Forum.Core.Providers
         {
             return true;
         }
+
+        public bool Delete(int id)
+        {
+            return true;
+        }
     }
 }

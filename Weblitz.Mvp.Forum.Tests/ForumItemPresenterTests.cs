@@ -75,5 +75,32 @@ namespace Weblitz.Mvp.Forum.Tests
                            });
         }
 
+        [Test]
+        public void ShouldGoToForumListOnDeleteWithId()
+        {
+            var view = _repository.DynamicMock<IForumItemView>();
+            var provider = _repository.DynamicMock<IForumProvider>();
+            var loader = default(IEventRaiser);
+            var deleter = default(IEventRaiser);
+            var id = 4123;
+            With.Mocks(_repository).
+                ExpectingInSameOrder(() =>
+                                         {
+                                             view.Load += null;
+                                             loader = LastCall.IgnoreArguments().GetEventRaiser();
+                                             view.Delete += null;
+                                             deleter = LastCall.IgnoreArguments().GetEventRaiser();
+                                             Expect.Call(view.IsPostBack).Return(true);
+                                             Expect.Call(provider.Delete(id)).Return(true);
+                                             Expect.Call(view.GoToForumList);
+                                         }).
+                Verify(() =>
+                           {
+                               new ForumItemPresenter(view, provider);
+                               loader.Raise(null, new EventArgs());
+                               deleter.Raise(null, new IdEventArgs {Id = id});
+                           });
+        }
+
     }
 }

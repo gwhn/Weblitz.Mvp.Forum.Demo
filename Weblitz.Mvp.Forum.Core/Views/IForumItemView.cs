@@ -9,5 +9,7 @@ namespace Weblitz.Mvp.Forum.Core.Views
         int CurrentId { get; }
         event EventHandler<IdEventArgs> Edit;
         void GoToForumForm(int id);
+        event EventHandler<IdEventArgs> Delete;
+        void GoToForumList();
     }
 }

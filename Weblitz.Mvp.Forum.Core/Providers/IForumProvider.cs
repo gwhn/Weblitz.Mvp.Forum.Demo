@@ -9,5 +9,6 @@ namespace Weblitz.Mvp.Forum.Core.Providers
         int Create(IForumInput forum);
         IForumDisplay Get(int id);
         bool Update(IForumInput forum);
+        bool Delete(int id);
     }
 }
