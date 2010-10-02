@@ -13,6 +13,19 @@ namespace Weblitz.Mvp.Forum.Web
 {
     public partial class ForumForm : System.Web.UI.Page, IForumFormView
     {
+        public IForumInput Forum
+        {
+            get { return new ForumInput { Name = NameTextBox.Text.Trim() }; }
+            set { NameTextBox.Text = value.Name; }
+        }
+
+        public event EventHandler Create;
+
+        public void GoToShowForum(int id)
+        {
+            Response.Redirect(string.Format("~/ShowForum.aspx?Id={0}", id));
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
             new ForumFormPresenter(this, new ForumProvider());
@@ -20,13 +33,8 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void SubmitButton_OnClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Create(this, e);
         }
 
-        public IForumInput Forum
-        {
-            get { return new ForumInput { Name = NameTextBox.Text.Trim() }; }
-            set { NameTextBox.Text = value.Name; }
-        }
     }
 }

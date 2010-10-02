@@ -16,6 +16,18 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
             _provider = provider;
 
             _view.Load += Load;
+            _view.Create += Create;
+        }
+
+        private void Create(object sender, EventArgs e)
+        {
+            if (!_view.IsValid) 
+                return;
+            var id = _provider.Create(_view.Forum);
+            if (id > 0)
+            {
+                _view.GoToShowForum(id);
+            }
         }
 
         private void Load(object sender, EventArgs e)

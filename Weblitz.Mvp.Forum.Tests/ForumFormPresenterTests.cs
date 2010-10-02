@@ -45,5 +45,36 @@ namespace Weblitz.Mvp.Forum.Tests
                                Assert.AreEqual(data.Name, view.Forum.Name);
                            });
         }
+
+        [Test]
+        public void ShouldGoToShowForumOnCreateNewForum()
+        {
+            var view = _repository.DynamicMock<IForumFormView>();
+            var provider = _repository.DynamicMock<IForumProvider>();
+            var loader = default(IEventRaiser);
+            var creator = default(IEventRaiser);
+            var data = new ForumInput { Name = "New Forum"};
+            var newId = 321;
+            With.Mocks(_repository).
+                ExpectingInSameOrder(() =>
+                                         {
+                                             view.Load += null;
+                                             loader = LastCall.IgnoreArguments().GetEventRaiser();
+                                             view.Create += null;
+                                             creator = LastCall.IgnoreArguments().GetEventRaiser();
+                                             Expect.Call(view.IsPostBack).Return(true);
+                                             Expect.Call(view.IsValid).Return(true);
+                                             Expect.Call(view.Forum).Return(data);
+                                             Expect.Call(provider.Create(data)).Return(newId);
+                                             Expect.Call(() => view.GoToShowForum(newId));
+                                         }).
+                Verify(() =>
+                           {
+                               new ForumFormPresenter(view, provider);
+                               loader.Raise(null, new EventArgs());
+                               creator.Raise(null, new EventArgs());
+                           });
+        }
+
     }
 }

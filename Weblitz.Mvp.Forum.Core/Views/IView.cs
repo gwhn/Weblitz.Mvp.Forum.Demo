@@ -6,6 +6,7 @@ namespace Weblitz.Mvp.Forum.Core.Views
     {
         event EventHandler Load;
         bool IsPostBack { get; }
+        bool IsValid { get; }
         void DataBind();
     }
 }
