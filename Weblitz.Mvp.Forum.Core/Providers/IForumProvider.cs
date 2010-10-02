@@ -7,5 +7,6 @@ namespace Weblitz.Mvp.Forum.Core.Providers
     {
         IEnumerable<IForumDisplay> List();
         int Create(IForumInput forum);
+        IForumDisplay Get(int id);
     }
 }

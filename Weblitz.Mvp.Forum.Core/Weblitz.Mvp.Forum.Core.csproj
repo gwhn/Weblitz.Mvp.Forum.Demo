@@ -46,11 +46,13 @@
     <Compile Include="Models\IForumDisplay.cs" />
     <Compile Include="Models\IForumInput.cs" />
     <Compile Include="Presenters\ForumFormPresenter.cs" />
+    <Compile Include="Presenters\ForumItemPresenter.cs" />
     <Compile Include="Presenters\ForumListPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ForumProvider.cs" />
     <Compile Include="Providers\IForumProvider.cs" />
     <Compile Include="Views\IForumFormView.cs" />
+    <Compile Include="Views\IForumItemView.cs" />
     <Compile Include="Views\IForumListView.cs" />
     <Compile Include="Views\IView.cs" />
   </ItemGroup>

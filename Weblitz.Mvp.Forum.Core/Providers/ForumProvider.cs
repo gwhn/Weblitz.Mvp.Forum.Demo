@@ -17,5 +17,10 @@ namespace Weblitz.Mvp.Forum.Core.Providers
         {
             return ++_counter;
         }
+
+        public IForumDisplay Get(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

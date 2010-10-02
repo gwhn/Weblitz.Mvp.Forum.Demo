@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ForumFormPresenterTests.cs" />
+    <Compile Include="ForumItemPresenterTests.cs" />
     <Compile Include="ForumListPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
