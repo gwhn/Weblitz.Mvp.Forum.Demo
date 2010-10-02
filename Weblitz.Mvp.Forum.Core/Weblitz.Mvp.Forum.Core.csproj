@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\String.cs" />
     <Compile Include="IdEventArgs.cs" />
     <Compile Include="Models\ForumDisplay.cs" />
     <Compile Include="Models\ForumInput.cs" />

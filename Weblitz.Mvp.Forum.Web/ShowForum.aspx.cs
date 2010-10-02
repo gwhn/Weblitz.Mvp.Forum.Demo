@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Weblitz.Mvp.Forum.Core;
+using Weblitz.Mvp.Forum.Core.Extensions;
 using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Presenters;
 using Weblitz.Mvp.Forum.Core.Providers;
@@ -16,7 +17,7 @@ namespace Weblitz.Mvp.Forum.Web
     {
         public IForumDisplay Forum
         {
-            get { return new ForumDisplay {Id = IdFrom(EditButton.CommandArgument)}; }
+            get { return new ForumDisplay {Id = EditButton.CommandArgument.ToId()}; }
             set
             {
                 NameLabel.Text = value.Name;
@@ -26,7 +27,7 @@ namespace Weblitz.Mvp.Forum.Web
 
         public int CurrentId
         {
-            get { return IdFrom(Request["Id"]); }
+            get { return Request["Id"].ToId(); }
         }
 
         public event EventHandler<IdEventArgs> Edit;
@@ -43,14 +44,7 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void EditButton_OnCommand(object sender, CommandEventArgs e)
         {
-            Edit(this, new IdEventArgs {Id = IdFrom(e.CommandArgument.ToString())});
-        }
-
-        private static int IdFrom(string source)
-        {
-            int id;
-            int.TryParse(source, out id);
-            return id;
+            Edit(this, new IdEventArgs {Id = e.CommandArgument.ToString().ToId()});
         }
     }
 }

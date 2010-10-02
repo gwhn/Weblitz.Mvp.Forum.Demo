@@ -26,6 +26,7 @@ namespace Weblitz.Mvp.Forum.Tests
             var view = _repository.DynamicMock<IForumFormView>();
             var provider = _repository.DynamicMock<IForumProvider>();
             var loader = default(IEventRaiser);
+            var id = 0;
             var data = new ForumInput();
             With.Mocks(_repository).
                 ExpectingInSameOrder(() =>
@@ -33,6 +34,7 @@ namespace Weblitz.Mvp.Forum.Tests
                                              view.Load += null;
                                              loader = LastCall.IgnoreArguments().GetEventRaiser();
                                              Expect.Call(view.IsPostBack).Return(false);
+                                             Expect.Call(view.CurrentId).Return(id).Repeat.Any();
                                              Expect.Call(view.Forum = data);
                                              LastCall.IgnoreArguments();
                                              SetupResult.For(view.Forum).Return(data);
@@ -73,6 +75,37 @@ namespace Weblitz.Mvp.Forum.Tests
                                new ForumFormPresenter(view, provider);
                                loader.Raise(null, new EventArgs());
                                creator.Raise(null, new EventArgs());
+                           });
+        }
+
+        [Test]
+        public void ShouldShowPopulatedForumFormOnLoadWithId()
+        {
+            var view = _repository.DynamicMock<IForumFormView>();
+            var provider = _repository.DynamicMock<IForumProvider>();
+            var loader = default(IEventRaiser);
+            var id = 1423;
+            var display = new ForumDisplay{Id = id, Name = "Populated Forum"};
+            var input = new ForumInput {Name = display.Name};
+            With.Mocks(_repository).
+                ExpectingInSameOrder(() =>
+                                         {
+                                             view.Load += null;
+                                             loader = LastCall.IgnoreArguments().GetEventRaiser();
+                                             Expect.Call(view.IsPostBack).Return(false);
+                                             Expect.Call(view.CurrentId).Return(id).Repeat.Any();
+                                             Expect.Call(provider.Get(id)).Return(display);
+                                             Expect.Call(view.Forum = input);
+                                             LastCall.IgnoreArguments();
+                                             SetupResult.For(view.Forum).Return(input);
+                                         }).
+                Verify(() =>
+                           {
+                               new ForumFormPresenter(view, provider);
+                               loader.Raise(null, new EventArgs());
+                               Assert.IsNotNull(view.Forum);
+                               Assert.AreEqual(display.Id, view.CurrentId);
+                               Assert.AreEqual(input.Name, view.Forum.Name);
                            });
         }
 

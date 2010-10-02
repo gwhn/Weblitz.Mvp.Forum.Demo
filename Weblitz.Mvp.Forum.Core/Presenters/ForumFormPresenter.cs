@@ -21,7 +21,7 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 
         private void Create(object sender, EventArgs e)
         {
-            if (!_view.IsValid) 
+            if (!_view.IsValid)
                 return;
             var id = _provider.Create(_view.Forum);
             if (id > 0)
@@ -32,11 +32,17 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 
         private void Load(object sender, EventArgs e)
         {
-            if (!_view.IsPostBack)
+            if (_view.IsPostBack) return;
+            var id = _view.CurrentId;
+            if (id > 0)
+            {
+                var display = _provider.Get(id);
+                _view.Forum = new ForumInput {Name = display.Name};
+            }
+            else
             {
                 _view.Forum = new ForumInput();
             }
-
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Weblitz.Mvp.Forum.Core.Extensions;
 using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Presenters;
 using Weblitz.Mvp.Forum.Core.Providers;
@@ -17,6 +18,11 @@ namespace Weblitz.Mvp.Forum.Web
         {
             get { return new ForumInput { Name = NameTextBox.Text.Trim() }; }
             set { NameTextBox.Text = value.Name; }
+        }
+
+        public int CurrentId
+        {
+            get { return Request["Id"].ToId(); }
         }
 
         public event EventHandler Create;
