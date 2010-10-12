@@ -7,8 +7,8 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 {
     public class ForumFormPresenter
     {
-        private IForumFormView _view;
-        private IForumProvider _provider;
+        private readonly IForumFormView _view;
+        private readonly IForumProvider _provider;
 
         public ForumFormPresenter(IForumFormView view, IForumProvider provider)
         {
