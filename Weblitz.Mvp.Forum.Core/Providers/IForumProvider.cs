@@ -3,7 +3,7 @@ using Weblitz.Mvp.Forum.Core.Models;
 
 namespace Weblitz.Mvp.Forum.Core.Providers
 {
-    public interface IForumProvider : IProvider<IForum>
+    public interface IForumProvider : IProvider<Models.Forum>
     {
     }
 }

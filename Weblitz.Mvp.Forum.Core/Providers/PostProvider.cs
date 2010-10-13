@@ -1,34 +1,73 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
 using Weblitz.Mvp.Forum.Core.Models;
 
 namespace Weblitz.Mvp.Forum.Core.Providers
 {
     public class PostProvider : IPostProvider
     {
-        public IEnumerable<IPost> List()
+        private readonly DataContext _dataContext;
+        private readonly Table<Post> _posts;
+
+        public PostProvider(string fileOrServerOrConnection)
         {
-            throw new NotImplementedException();
+            _dataContext = new DataContext(fileOrServerOrConnection);
+            _posts = _dataContext.GetTable<Post>();
         }
 
-        public int Create(IPost entity)
+        public IList<Post> List()
         {
-            throw new NotImplementedException();
+            return new List<Post>(_posts);
         }
 
-        public IPost Get(int id)
+        public int Create(Post entity)
         {
-            throw new NotImplementedException();
+            _posts.InsertOnSubmit(entity);
+            _dataContext.SubmitChanges();
+            return entity.Id;
         }
 
-        public bool Update(IPost entity)
+        public Post Get(int id)
         {
-            throw new NotImplementedException();
+            return _posts.FirstOrDefault(e => e.Id == id);
+        }
+
+        public bool Update(Post entity)
+        {
+            try
+            {
+                var post = _posts.First(e => e.Id == entity.Id);
+                post.Body = entity.Body;
+                post.Topic = entity.Topic;
+                _dataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var post = _posts.First(e => e.Id == id);
+                _posts.DeleteOnSubmit(post);
+                _dataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (_dataContext != null) _dataContext.Dispose();
         }
     }
 }

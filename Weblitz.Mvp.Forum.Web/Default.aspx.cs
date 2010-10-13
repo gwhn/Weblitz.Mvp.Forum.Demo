@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -38,7 +39,7 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            new ForumListPresenter(this, new ForumProvider());
+            new ForumListPresenter(this, new ForumProvider(ConfigurationManager.ConnectionStrings["Weblitz.Mvp.Forum"].ConnectionString));
         }
 
         protected void NewForumLinkButton_OnClick(object sender, EventArgs e)

@@ -55,6 +55,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="App_Data\Weblitz.Mvp.Forum.mdf" />
     <Content Include="ForumForm.aspx" />
     <Content Include="ShowForum.aspx" />
     <Content Include="ShowTopic.aspx" />
@@ -156,9 +157,7 @@
       <DependentUpon>TopicForm.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />

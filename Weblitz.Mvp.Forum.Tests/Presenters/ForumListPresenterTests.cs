@@ -56,7 +56,7 @@ namespace Weblitz.Mvp.Forum.Tests.Presenters
             var view = _repository.DynamicMock<IForumListView>();
             var provider = _repository.DynamicMock<IForumProvider>();
             var loader = default(IEventRaiser);
-            var data = new List<IForum> {new Core.Models.Forum {Name = "First Feature Forum"}};
+            var data = new List<Core.Models.Forum> {new Core.Models.Forum {Name = "First Feature Forum"}};
             var display = data.Select(forum => new ForumMapper().ToDisplay(forum)).ToList();
             With.Mocks(_repository).
                 ExpectingInSameOrder(() =>

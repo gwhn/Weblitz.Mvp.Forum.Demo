@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Weblitz.Mvp.Forum.Core.Models;
 
 namespace Weblitz.Mvp.Forum.Core.Mappers
 {
-    public class ForumMapper : IMapper<IForum, IForumDisplay, IForumInput>
+    public class ForumMapper : IMapper<Models.Forum, IForumDisplay, IForumInput>
     {
-        public IForumDisplay ToDisplay(IForum entity)
+        public IForumDisplay ToDisplay(Models.Forum entity)
         {
             return new ForumDisplay
                        {
@@ -20,12 +18,12 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
                        };
         }
 
-        public IForum FromInput(IForumInput input)
+        public Models.Forum FromInput(IForumInput input)
         {
             return new Models.Forum {Id = input.Id, Name = input.Name};
         }
 
-        public IForumInput ToInput(IForum entity)
+        public IForumInput ToInput(Models.Forum entity)
         {
             return new ForumInput {Id = entity.Id, Name = entity.Name};
         }

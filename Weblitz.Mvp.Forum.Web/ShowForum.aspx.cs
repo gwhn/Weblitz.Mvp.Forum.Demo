@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -22,6 +23,7 @@ namespace Weblitz.Mvp.Forum.Web
             {
                 NameLabel.Text = value.Name;
                 EditButton.CommandArgument = value.Id.ToString();
+                DeleteButton.CommandArgument = value.Id.ToString();
                 TopicRepeater.DataSource = value.Topics;
             }
         }
@@ -61,7 +63,7 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            new ForumItemPresenter(this, new ForumProvider());
+            new ForumItemPresenter(this, new ForumProvider(ConfigurationManager.ConnectionStrings["Weblitz.Mvp.Forum"].ConnectionString));
         }
 
         protected void OptionsButton_OnCommand(object sender, CommandEventArgs e)

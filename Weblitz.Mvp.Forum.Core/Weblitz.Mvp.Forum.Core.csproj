@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,11 +51,8 @@
     <Compile Include="Models\ForumDisplay.cs" />
     <Compile Include="Models\ForumInput.cs" />
     <Compile Include="Models\IEntity.cs" />
-    <Compile Include="Models\IForum.cs" />
     <Compile Include="Models\IForumDisplay.cs" />
     <Compile Include="Models\IForumInput.cs" />
-    <Compile Include="Models\IPost.cs" />
-    <Compile Include="Models\ITopic.cs" />
     <Compile Include="Models\ITopicDisplay.cs" />
     <Compile Include="Models\ITopicInput.cs" />
     <Compile Include="Models\Post.cs" />

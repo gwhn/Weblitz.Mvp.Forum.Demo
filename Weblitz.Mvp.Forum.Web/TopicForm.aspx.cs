@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -56,7 +57,7 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            new TopicFormPresenter(this, new TopicProvider());
+            new TopicFormPresenter(this, new TopicProvider(ConfigurationManager.ConnectionStrings["Weblitz.Mvp.Forum"].ConnectionString));
         }
 
         protected void SubmitButton_OnCommand(object sender, CommandEventArgs e)

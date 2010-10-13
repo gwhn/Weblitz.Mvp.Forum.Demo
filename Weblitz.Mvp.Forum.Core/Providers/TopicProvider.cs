@@ -1,34 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
 using Weblitz.Mvp.Forum.Core.Models;
 
 namespace Weblitz.Mvp.Forum.Core.Providers
 {
     public class TopicProvider : ITopicProvider
     {
-        public IEnumerable<ITopic> List()
+        private readonly DataContext _dataContext;
+        private readonly Table<Topic> _topics;
+
+        public TopicProvider(string fileOrServerOrConnection)
         {
-            throw new NotImplementedException();
+            _dataContext = new DataContext(fileOrServerOrConnection);
+            _topics = _dataContext.GetTable<Topic>();
         }
 
-        public int Create(ITopic entity)
+        public IList<Topic> List()
         {
-            throw new NotImplementedException();
+            return new List<Topic>(_topics);
         }
 
-        public ITopic Get(int id)
+        public int Create(Topic entity)
         {
-            throw new NotImplementedException();
+            _topics.InsertOnSubmit(entity);
+            _dataContext.SubmitChanges();
+            return entity.Id;
         }
 
-        public bool Update(ITopic entity)
+        public Topic Get(int id)
         {
-            throw new NotImplementedException();
+            return _topics.FirstOrDefault(e => e.Id == id);
+        }
+
+        public bool Update(Topic entity)
+        {
+            try
+            {
+                var topic = _topics.First(e => e.Id == entity.Id);
+                topic.Title = entity.Title;
+                topic.Body = entity.Body;
+                topic.Sticky = entity.Sticky;
+                topic.Forum = entity.Forum;
+                topic.Posts = entity.Posts;
+                _dataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var topic = _topics.First(e => e.Id == id);
+                _topics.DeleteOnSubmit(topic);
+                _dataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (_dataContext != null) _dataContext.Dispose();
         }
     }
 }

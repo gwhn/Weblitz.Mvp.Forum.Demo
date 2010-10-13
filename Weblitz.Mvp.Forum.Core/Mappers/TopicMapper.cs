@@ -3,9 +3,9 @@ using Weblitz.Mvp.Forum.Core.Models;
 
 namespace Weblitz.Mvp.Forum.Core.Mappers
 {
-    public class TopicMapper : IMapper<ITopic, ITopicDisplay, ITopicInput>
+    public class TopicMapper : IMapper<Topic, ITopicDisplay, ITopicInput>
     {
-        public ITopicDisplay ToDisplay(ITopic entity)
+        public ITopicDisplay ToDisplay(Topic entity)
         {
             return new TopicDisplay
                        {
@@ -17,7 +17,7 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
                        };
         }
 
-        public ITopic FromInput(ITopicInput input)
+        public Topic FromInput(ITopicInput input)
         {
             return new Topic
                        {
@@ -29,7 +29,7 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
                        };
         }
 
-        public ITopicInput ToInput(ITopic entity)
+        public ITopicInput ToInput(Topic entity)
         {
             return new TopicInput
                        {

@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Linq;
 using NUnit.Framework;
 using Weblitz.Mvp.Forum.Core.Mappers;
 using Weblitz.Mvp.Forum.Core.Models;
@@ -17,28 +18,11 @@ namespace Weblitz.Mvp.Forum.Tests.Mappers
                                Id = 1423,
                                Name = "ToDisplay name",
                            };
-            data.Topics = new List<ITopic>
-                              {
-                                  new Topic
-                                      {
-                                          Id = 1434,
-                                          Forum = data,
-                                          Sticky = true,
-                                          Title = "ToDisplay title"
-                                      }
-                              };
-
             // Act
             var display = new ForumMapper().ToDisplay(data);
             // Assert
             Assert.AreEqual(data.Id, display.Id);
             Assert.AreEqual(data.Name, display.Name);
-            Assert.AreEqual(data.Topics.Count, display.Topics.Count);
-            Assert.IsNotNull(data.Topics[0]);
-            Assert.IsNotNull(display.Topics[0]);
-            Assert.AreEqual(data.Topics[0].Id, display.Topics[0].Id);
-            Assert.AreEqual(data.Topics[0].Sticky, display.Topics[0].Sticky);
-            Assert.AreEqual(data.Topics[0].Title, display.Topics[0].Title);
         }
 
         [Test]

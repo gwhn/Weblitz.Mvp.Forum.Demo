@@ -1,47 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using Weblitz.Mvp.Forum.Core.Models;
+using System.Data.Linq;
+using System.Linq;
 
 namespace Weblitz.Mvp.Forum.Core.Providers
 {
     public class ForumProvider : IForumProvider
     {
-        private static int _counter = 0;
+        private readonly DataContext _dataContext;
+        private readonly Table<Models.Forum> _forums;
 
-        public IEnumerable<IForum> List()
+        public ForumProvider(string fileOrServerOrConnection)
         {
-            return new List<IForum> {new Models.Forum {Id = 321, Name = "First Feature Forum"}};
+            _dataContext = new DataContext(fileOrServerOrConnection);
+            _forums = _dataContext.GetTable<Models.Forum>();
         }
 
-        public int Create(IForum entity)
+        public IList<Models.Forum> List()
         {
-            return ++_counter;
+            return new List<Models.Forum>(_forums);
         }
 
-        public IForum Get(int id)
+        public int Create(Models.Forum entity)
         {
-            var forum = new Models.Forum {Id = id, Name = "Fetched Forum by Id"};
-            forum.Topics = new List<ITopic>
-                               {
-                                   new Topic
-                                       {
-                                           Id = 1423,
-                                           Forum = forum,
-                                           Sticky = true,
-                                           Title = "Mock topic title"
-                                       }
-                               };
-            return forum;
+            _forums.InsertOnSubmit(entity);
+            _dataContext.SubmitChanges();
+            return entity.Id;
         }
 
-        public bool Update(IForum entity)
+        public Models.Forum Get(int id)
         {
-            return true;
+            return _forums.FirstOrDefault(e => e.Id == id);
+        }
+
+        public bool Update(Models.Forum entity)
+        {
+            try
+            {
+                var forum = _forums.First(e => e.Id == entity.Id);
+                forum.Name = entity.Name;
+                forum.Topics = entity.Topics;
+                _dataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Delete(int id)
         {
-            return true;
+            try
+            {
+                var forum = _forums.First(e => e.Id == id);
+                _forums.DeleteOnSubmit(forum);
+                _dataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (_dataContext != null) _dataContext.Dispose();
         }
     }
 }

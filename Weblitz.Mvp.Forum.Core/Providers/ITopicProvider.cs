@@ -2,7 +2,7 @@
 
 namespace Weblitz.Mvp.Forum.Core.Providers
 {
-    public interface ITopicProvider : IProvider<ITopic>
+    public interface ITopicProvider : IProvider<Topic>
     {
     }
 }
