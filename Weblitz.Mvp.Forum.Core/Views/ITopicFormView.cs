@@ -7,8 +7,9 @@ namespace Weblitz.Mvp.Forum.Core.Views
     {
         event EventHandler Create;
         ITopicInput Topic { get; set; }
-        int CurrentId { get; set; }
+        int CurrentId { get; }
         int ParentId { get; }
         void GoToShowTopic(int id);
+        event EventHandler<IdEventArgs> Update;
     }
 }

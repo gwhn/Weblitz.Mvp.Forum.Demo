@@ -18,6 +18,13 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 
             _view.Load += Load;
             _view.Create += Create;
+            _view.Update += Update;
+        }
+
+        private void Update(object sender, IdEventArgs e)
+        {
+            if (!_view.IsValid) return;
+            if (_provider.Update(new TopicMapper().FromInput(_view.Topic))) _view.GoToShowTopic(e.Id);
         }
 
         private void Create(object sender, EventArgs e)

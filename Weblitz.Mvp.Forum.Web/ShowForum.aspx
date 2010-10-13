@@ -10,7 +10,7 @@
         <div class="topic list">
         <asp:Repeater ID="TopicRepeater" runat="server" OnItemDataBound="TopicRepeater_OnItemDataBound">
             <ItemTemplate>
-                <div class="topic item">
+                <div class="item">
                     <asp:LinkButton ID="TitleLinkButton" runat="server" CssClass="title" OnCommand="TitleLinkButton_OnCommand"/>
                 </div>
             </ItemTemplate>

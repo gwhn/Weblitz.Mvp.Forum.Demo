@@ -52,6 +52,13 @@ namespace Weblitz.Mvp.Forum.Web
             Response.Redirect(string.Format("~/TopicForm.aspx?ForumId={0}", forumId));
         }
 
+        public event EventHandler<IdEventArgs> ShowTopic;
+
+        public void GoToTopicItem(int id)
+        {
+            Response.Redirect(string.Format("~/ShowTopic.aspx?Id={0}", id));
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
             new ForumItemPresenter(this, new ForumProvider());
@@ -62,10 +69,10 @@ namespace Weblitz.Mvp.Forum.Web
             switch (e.CommandName)
             {
                 case "Edit":
-                    Edit(this, new IdEventArgs { Id = e.CommandArgument.ToString().ToId() });
+                    Edit(this, new IdEventArgs {Id = e.CommandArgument.ToString().ToId()});
                     break;
                 case "Delete":
-                    Delete(this, new IdEventArgs { Id = e.CommandArgument.ToString().ToId() });
+                    Delete(this, new IdEventArgs {Id = e.CommandArgument.ToString().ToId()});
                     break;
             }
         }
@@ -88,7 +95,7 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void TitleLinkButton_OnCommand(object sender, CommandEventArgs e)
         {
-            throw new NotImplementedException();
+            ShowTopic(this, new IdEventArgs {Id = e.CommandArgument.ToString().ToId()});
         }
     }
 }

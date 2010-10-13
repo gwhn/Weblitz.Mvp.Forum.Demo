@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Weblitz.Mvp.Forum.Core;
+using Weblitz.Mvp.Forum.Core.Extensions;
 using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Presenters;
 using Weblitz.Mvp.Forum.Core.Providers;
@@ -58,9 +59,7 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void NameLinkButton_OnCommand(object sender, CommandEventArgs e)
         {
-            int id;
-            if (!int.TryParse(e.CommandArgument.ToString(), out id)) return;
-            Show(this, new IdEventArgs{ Id = id});
+            Show(this, new IdEventArgs { Id = e.CommandArgument.ToString().ToId() });
         }
     }
 }

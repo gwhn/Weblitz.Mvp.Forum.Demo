@@ -17,7 +17,14 @@ namespace Weblitz.Mvp.Forum.Web
     {
         public IForumInput Forum
         {
-            get { return new ForumInput {Id = SubmitButton.CommandArgument.ToId(), Name = NameTextBox.Text.Trim()}; }
+            get
+            {
+                return new ForumInput
+                           {
+                               Id = SubmitButton.CommandArgument.ToId(),
+                               Name = NameTextBox.Text.Trim()
+                           };
+            }
             set
             {
                 NameTextBox.Text = value.Name;
@@ -48,9 +55,9 @@ namespace Weblitz.Mvp.Forum.Web
         {
             var id = e.CommandArgument.ToString().ToId();
             if (id > 0)
-                Update(this, new IdEventArgs{Id = id});
+                Update(this, new IdEventArgs {Id = id});
             else
-                Create(this, e);                
+                Create(this, e);
         }
     }
 }

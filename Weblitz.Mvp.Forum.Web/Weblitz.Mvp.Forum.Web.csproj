@@ -57,6 +57,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="ForumForm.aspx" />
     <Content Include="ShowForum.aspx" />
+    <Content Include="ShowTopic.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -132,6 +133,13 @@
     </Compile>
     <Compile Include="ShowForum.aspx.designer.cs">
       <DependentUpon>ShowForum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowTopic.aspx.cs">
+      <DependentUpon>ShowTopic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowTopic.aspx.designer.cs">
+      <DependentUpon>ShowTopic.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

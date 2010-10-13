@@ -13,7 +13,10 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
                        {
                            Id = entity.Id,
                            Name = entity.Name,
-                           Topics = entity.Topics.Select(topic => new TopicMapper().ToDisplay(topic)).ToList()
+                           Topics =
+                               entity.Topics == null
+                                   ? null
+                                   : entity.Topics.Select(topic => new TopicMapper().ToDisplay(topic)).ToList()
                        };
         }
 

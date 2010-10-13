@@ -16,7 +16,8 @@ namespace Weblitz.Mvp.Forum.Tests.Mappers
                                Id = 1423,
                                Forum = new Core.Models.Forum {Id = 1412},
                                Sticky = true,
-                               Title = "ToDisplay name"
+                               Title = "ToDisplay name",
+                               Body = "ToDisplay body"
                            };
             // Act
             var display = new TopicMapper().ToDisplay(data);
@@ -25,13 +26,21 @@ namespace Weblitz.Mvp.Forum.Tests.Mappers
             Assert.AreEqual(data.Forum.Id, display.ForumId);
             Assert.AreEqual(data.Sticky, display.Sticky);
             Assert.AreEqual(data.Title, display.Title);
+            Assert.AreEqual(data.Body, display.Body);
         }
 
         [Test]
         public void ShouldMapTopicEntityFromInput()
         {
             // Arrange
-            var input = new TopicInput {Id = 1423, ForumId = 1411, Sticky = true, Title = "FromInput name"};
+            var input = new TopicInput
+                            {
+                                Id = 1423, 
+                                ForumId = 1411, 
+                                Sticky = true, 
+                                Title = "FromInput name",
+                                Body = "FromInput body"
+                            };
             // Act
             var data = new TopicMapper().FromInput(input);
             // Assert
@@ -39,6 +48,7 @@ namespace Weblitz.Mvp.Forum.Tests.Mappers
             Assert.AreEqual(input.ForumId, data.Forum.Id);
             Assert.AreEqual(input.Sticky, data.Sticky);
             Assert.AreEqual(input.Title, data.Title);
+            Assert.AreEqual(input.Body, data.Body);
         }
 
         [Test]
@@ -50,7 +60,8 @@ namespace Weblitz.Mvp.Forum.Tests.Mappers
                                Id = 4132,
                                Forum = new Core.Models.Forum {Id = 1422},
                                Sticky = false,
-                               Title = "ToInput name"
+                               Title = "ToInput name",
+                               Body = "ToInput body"
                            };
             // Act
             var input = new TopicMapper().ToInput(data);
@@ -59,6 +70,7 @@ namespace Weblitz.Mvp.Forum.Tests.Mappers
             Assert.AreEqual(data.Forum.Id, input.ForumId);
             Assert.AreEqual(data.Sticky, input.Sticky);
             Assert.AreEqual(data.Title, input.Title);
+            Assert.AreEqual(data.Body, input.Body);
         }
     }
 }

@@ -21,6 +21,12 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
             _view.Delete += Delete;
 
             _view.NewTopic += NewTopic;
+            _view.ShowTopic += ShowTopic;
+        }
+
+        private void ShowTopic(object sender, IdEventArgs e)
+        {
+            _view.GoToTopicItem(e.Id);
         }
 
         private void NewTopic(object sender, EventArgs e)

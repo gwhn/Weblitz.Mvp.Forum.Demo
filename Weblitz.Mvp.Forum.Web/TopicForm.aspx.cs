@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Weblitz.Mvp.Forum.Core;
 using Weblitz.Mvp.Forum.Core.Extensions;
 using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Presenters;
@@ -18,14 +19,27 @@ namespace Weblitz.Mvp.Forum.Web
 
         public ITopicInput Topic
         {
-            get { return new TopicInput {Title = TitleTextBox.Text, Sticky = StickyCheckBox.Checked}; }
-            set { throw new NotImplementedException(); }
+            get
+            {
+                return new TopicInput
+                           {
+                               Title = TitleTextBox.Text, 
+                               Body = BodyTextBox.Text,
+                               Sticky = StickyCheckBox.Checked
+                           };
+            }
+            set 
+            { 
+                TitleTextBox.Text = value.Title;
+                BodyTextBox.Text = value.Body;
+                StickyCheckBox.Checked = value.Sticky;
+                SubmitButton.CommandArgument = value.Id.ToString();
+            }
         }
 
         public int CurrentId
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return Request["Id"].ToId(); }
         }
 
         public int ParentId
@@ -33,16 +47,12 @@ namespace Weblitz.Mvp.Forum.Web
             get { return Request["ForumId"].ToId(); }
         }
 
-        public int ForumId
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
         public void GoToShowTopic(int id)
         {
-            throw new NotImplementedException();
+            Response.Redirect(string.Format("~/ShowTopic.aspx?Id={0}", id));
         }
+
+        public event EventHandler<IdEventArgs> Update;
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -51,12 +61,11 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void SubmitButton_OnCommand(object sender, CommandEventArgs e)
         {
-            Create(this, e);
-//            var id = e.CommandArgument.ToString().ToId();
-//            if (id > 0)
-//                Update(this, new IdEventArgs { Id = id });
-//            else
-//                Create(this, e);
+            var id = e.CommandArgument.ToString().ToId();
+            if (id > 0)
+                Update(this, new IdEventArgs { Id = id });
+            else
+                Create(this, e);
         }
 
     }

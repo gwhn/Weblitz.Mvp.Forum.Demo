@@ -9,6 +9,10 @@
            <dd><asp:TextBox ID="TitleTextBox" runat="server"/></dd> 
         </dl>
         <dl>
+           <dt><asp:Label ID="BodyLabel" runat="server" Text="Body" AssociatedControlID="BodyTextBox"/></dt>
+           <dd><asp:TextBox ID="BodyTextBox" runat="server" TextMode="MultiLine"/></dd> 
+        </dl>
+        <dl>
            <dt><asp:Label ID="StickyLabel" runat="server" Text="Name" AssociatedControlID="StickyCheckBox"/></dt>
            <dd><asp:CheckBox ID="StickyCheckBox" runat="server" /></dd> 
         </dl>

@@ -12,7 +12,8 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
                            Id = entity.Id,
                            ForumId = entity.Forum.Id,
                            Sticky = entity.Sticky,
-                           Title = entity.Title
+                           Title = entity.Title,
+                           Body = entity.Body
                        };
         }
 
@@ -23,7 +24,8 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
                            Id = input.Id,
                            Forum = new Models.Forum {Id = input.ForumId},
                            Sticky = input.Sticky,
-                           Title = input.Title
+                           Title = input.Title,
+                           Body = input.Body
                        };
         }
 
@@ -34,7 +36,8 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
                            Id = entity.Id,
                            ForumId = entity.Forum.Id,
                            Sticky = entity.Sticky,
-                           Title = entity.Title
+                           Title = entity.Title,
+                           Body = entity.Body
                        };
         }
     }
