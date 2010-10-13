@@ -1,4 +1,5 @@
 ﻿using System;
+using Weblitz.Mvp.Forum.Core.Mappers;
 using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Providers;
 using Weblitz.Mvp.Forum.Core.Views;
@@ -22,38 +23,22 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 
         private void Update(object sender, IdEventArgs e)
         {
-            if (!_view.IsValid)
-                return;
-            if (_provider.Update(_view.Forum))
-            {
-                _view.GoToShowForum(e.Id);
-            }
+            if (!_view.IsValid) return;
+            if (_provider.Update(new ForumMapper().FromInput(_view.Forum))) _view.GoToShowForum(e.Id);
         }
 
         private void Create(object sender, EventArgs e)
         {
-            if (!_view.IsValid)
-                return;
-            var id = _provider.Create(_view.Forum);
-            if (id > 0)
-            {
-                _view.GoToShowForum(id);
-            }
+            if (!_view.IsValid) return;
+            var id = _provider.Create(new ForumMapper().FromInput(_view.Forum));
+            if (id > 0) _view.GoToShowForum(id);
         }
 
         private void Load(object sender, EventArgs e)
         {
             if (_view.IsPostBack) return;
             var id = _view.CurrentId;
-            if (id > 0)
-            {
-                var display = _provider.Get(id);
-                _view.Forum = new ForumInput {Id = id, Name = display.Name};
-            }
-            else
-            {
-                _view.Forum = new ForumInput();
-            }
+            _view.Forum = id > 0 ? new ForumMapper().ToInput(_provider.Get(id)) : new ForumInput();
         }
     }
 }

@@ -11,5 +11,7 @@ namespace Weblitz.Mvp.Forum.Core.Views
         void GoToForumForm(int id);
         event EventHandler<IdEventArgs> Delete;
         void GoToForumList();
+        event EventHandler NewTopic;
+        void GoToTopicForm(int forumId);
     }
 }

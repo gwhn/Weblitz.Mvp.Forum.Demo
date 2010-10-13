@@ -43,24 +43,45 @@
   <ItemGroup>
     <Compile Include="Extensions\String.cs" />
     <Compile Include="IdEventArgs.cs" />
+    <Compile Include="Mappers\ForumMapper.cs" />
+    <Compile Include="Mappers\IMapper.cs" />
+    <Compile Include="Mappers\TopicMapper.cs" />
+    <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\ForumDisplay.cs" />
     <Compile Include="Models\ForumInput.cs" />
+    <Compile Include="Models\IEntity.cs" />
+    <Compile Include="Models\IForum.cs" />
     <Compile Include="Models\IForumDisplay.cs" />
     <Compile Include="Models\IForumInput.cs" />
+    <Compile Include="Models\IPost.cs" />
+    <Compile Include="Models\ITopic.cs" />
+    <Compile Include="Models\ITopicDisplay.cs" />
+    <Compile Include="Models\ITopicInput.cs" />
+    <Compile Include="Models\Topic.cs" />
+    <Compile Include="Models\TopicDisplay.cs" />
+    <Compile Include="Models\TopicInput.cs" />
     <Compile Include="Presenters\ForumFormPresenter.cs" />
     <Compile Include="Presenters\ForumItemPresenter.cs" />
     <Compile Include="Presenters\ForumListPresenter.cs" />
+    <Compile Include="Presenters\TopicFormPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ForumProvider.cs" />
     <Compile Include="Providers\IForumProvider.cs" />
+    <Compile Include="Providers\IPostProvider.cs" />
+    <Compile Include="Providers\IProvider.cs" />
+    <Compile Include="Providers\ITopicProvider.cs" />
+    <Compile Include="Providers\PostProvider.cs" />
+    <Compile Include="Providers\TopicProvider.cs" />
     <Compile Include="Views\IForumFormView.cs" />
     <Compile Include="Views\IForumItemView.cs" />
     <Compile Include="Views\IForumListView.cs" />
+    <Compile Include="Views\ITopicFormView.cs" />
     <Compile Include="Views\IView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

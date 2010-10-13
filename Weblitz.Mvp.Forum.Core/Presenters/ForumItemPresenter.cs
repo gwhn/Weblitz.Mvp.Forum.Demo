@@ -1,4 +1,6 @@
 ﻿using System;
+using Weblitz.Mvp.Forum.Core.Mappers;
+using Weblitz.Mvp.Forum.Core.Models;
 using Weblitz.Mvp.Forum.Core.Providers;
 using Weblitz.Mvp.Forum.Core.Views;
 
@@ -17,6 +19,13 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
             _view.Load += Load;
             _view.Edit += Edit;
             _view.Delete += Delete;
+
+            _view.NewTopic += NewTopic;
+        }
+
+        private void NewTopic(object sender, EventArgs e)
+        {
+            _view.GoToTopicForm(_view.CurrentId);
         }
 
         private void Delete(object sender, IdEventArgs e)
@@ -34,10 +43,8 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
 
         private void Load(object sender, EventArgs e)
         {
-            if (!_view.IsPostBack)
-            {
-                _view.Forum = _provider.Get(_view.CurrentId);
-            }
+            if (_view.IsPostBack) return;
+            _view.Forum = new ForumMapper().ToDisplay(_provider.Get(_view.CurrentId));
         }
     }
 }

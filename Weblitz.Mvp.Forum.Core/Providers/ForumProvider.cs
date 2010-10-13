@@ -8,22 +8,22 @@ namespace Weblitz.Mvp.Forum.Core.Providers
     {
         private static int _counter = 0;
 
-        public IEnumerable<IForumDisplay> List()
+        public IEnumerable<IForum> List()
         {
-            return new List<IForumDisplay> {new ForumDisplay {Id = 321, Name = "First Feature Forum"}};
+            return new List<IForum> {new Models.Forum {Id = 321, Name = "First Feature Forum"}};
         }
 
-        public int Create(IForumInput forum)
+        public int Create(IForum entity)
         {
             return ++_counter;
         }
 
-        public IForumDisplay Get(int id)
+        public IForum Get(int id)
         {
-            return new ForumDisplay {Id = id, Name = "Fetched Forum by Id"};
+            return new Models.Forum {Id = id, Name = "Fetched Forum by Id"};
         }
 
-        public bool Update(IForumInput forum)
+        public bool Update(IForum entity)
         {
             return true;
         }

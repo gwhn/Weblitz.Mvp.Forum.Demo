@@ -1,0 +1,12 @@
+using System;
+
+namespace Weblitz.Mvp.Forum.Core.Models
+{
+    public class Topic : ITopic
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public bool Sticky { get; set; }
+        public IForum Forum { get; set; }
+    }
+}

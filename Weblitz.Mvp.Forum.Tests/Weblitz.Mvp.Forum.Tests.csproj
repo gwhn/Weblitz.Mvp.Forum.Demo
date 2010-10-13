@@ -47,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ForumFormPresenterTests.cs" />
-    <Compile Include="ForumItemPresenterTests.cs" />
-    <Compile Include="ForumListPresenterTests.cs" />
+    <Compile Include="Mappers\ForumMapperTests.cs" />
+    <Compile Include="Mappers\TopicMapperTests.cs" />
+    <Compile Include="Presenters\ForumFormPresenterTests.cs" />
+    <Compile Include="Presenters\ForumItemPresenterTests.cs" />
+    <Compile Include="Presenters\ForumListPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +59,9 @@
       <Project>{3EEB406E-B9B8-485F-9961-8F8D4C1B329C}</Project>
       <Name>Weblitz.Mvp.Forum.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Providers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

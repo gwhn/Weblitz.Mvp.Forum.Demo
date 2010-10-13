@@ -44,6 +44,13 @@ namespace Weblitz.Mvp.Forum.Web
             Response.Redirect("~/Default.aspx");
         }
 
+        public event EventHandler NewTopic;
+
+        public void GoToTopicForm(int forumId)
+        {
+            Response.Redirect(string.Format("~/TopicForm.aspx?ForumId={0}", forumId));
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
             new ForumItemPresenter(this, new ForumProvider());
@@ -60,6 +67,11 @@ namespace Weblitz.Mvp.Forum.Web
                     Delete(this, new IdEventArgs { Id = e.CommandArgument.ToString().ToId() });
                     break;
             }
+        }
+
+        protected void NewTopicButton_OnClick(object sender, EventArgs e)
+        {
+            NewTopic(this, e);
         }
     }
 }
