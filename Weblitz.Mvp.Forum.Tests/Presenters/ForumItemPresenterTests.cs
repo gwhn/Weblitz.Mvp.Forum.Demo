@@ -39,14 +39,11 @@ namespace Weblitz.Mvp.Forum.Tests.Presenters
                                              Expect.Call(view.CurrentId).Return(id);
                                              Expect.Call(provider.Get(id)).Return(data);
                                              Expect.Call(view.Forum = display).IgnoreArguments();
-                                             SetupResult.For(view.Forum).Return(display);
                                          }).
                 Verify(() =>
                            {
                                new ForumItemPresenter(view, provider);
                                loader.Raise(null, new EventArgs());
-                               Assert.IsNotNull(view.Forum);
-                               Assert.AreEqual(id, view.Forum.Id);
                            });
         }
 

@@ -38,7 +38,7 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
         {
             if (_view.IsPostBack) return;
             var id = _view.CurrentId;
-            _view.Topic = id > 0 ? new TopicMapper().ToInput(_provider.Get(id)) : new TopicInput { ForumId = _view.ParentId };
+            _view.Topic = id > 0 ? new TopicMapper().ToInput(_provider.Get(id)) : new TopicInput();
         }
     }
 }

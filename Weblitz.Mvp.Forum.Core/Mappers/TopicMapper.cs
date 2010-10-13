@@ -10,7 +10,7 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
             return new TopicDisplay
                        {
                            Id = entity.Id,
-                           ForumId = entity.Forum.Id,
+                           ForumId = entity.ForumId,
                            Sticky = entity.Sticky,
                            Title = entity.Title,
                            Body = entity.Body
@@ -22,7 +22,7 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
             return new Topic
                        {
                            Id = input.Id,
-                           Forum = new Models.Forum {Id = input.ForumId},
+                           ForumId = input.ForumId,
                            Sticky = input.Sticky,
                            Title = input.Title,
                            Body = input.Body
@@ -34,7 +34,7 @@ namespace Weblitz.Mvp.Forum.Core.Mappers
             return new TopicInput
                        {
                            Id = entity.Id,
-                           ForumId = entity.Forum.Id,
+                           ForumId = entity.ForumId,
                            Sticky = entity.Sticky,
                            Title = entity.Title,
                            Body = entity.Body

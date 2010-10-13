@@ -5,7 +5,7 @@ namespace Weblitz.Mvp.Forum.Core.Views
 {
     public interface IForumItemView : IView
     {
-        IForumDisplay Forum { get; set; }
+        IForumDisplay Forum { set; }
         int CurrentId { get; }
         event EventHandler<IdEventArgs> Edit;
         void GoToForumForm(int id);

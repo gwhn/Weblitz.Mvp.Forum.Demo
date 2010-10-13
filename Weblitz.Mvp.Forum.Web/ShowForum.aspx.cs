@@ -18,11 +18,10 @@ namespace Weblitz.Mvp.Forum.Web
     {
         public IForumDisplay Forum
         {
-            get { return new ForumDisplay {Id = EditButton.CommandArgument.ToId()}; }
             set
             {
                 NameLabel.Text = value.Name;
-                EditButton.CommandArgument = value.Id.ToString();
+                EditLinkButton.CommandArgument = value.Id.ToString();
                 DeleteButton.CommandArgument = value.Id.ToString();
                 TopicRepeater.DataSource = value.Topics;
             }
@@ -66,24 +65,6 @@ namespace Weblitz.Mvp.Forum.Web
             new ForumItemPresenter(this, new ForumProvider(ConfigurationManager.ConnectionStrings["Weblitz.Mvp.Forum"].ConnectionString));
         }
 
-        protected void OptionsButton_OnCommand(object sender, CommandEventArgs e)
-        {
-            switch (e.CommandName)
-            {
-                case "Edit":
-                    Edit(this, new IdEventArgs {Id = e.CommandArgument.ToString().ToId()});
-                    break;
-                case "Delete":
-                    Delete(this, new IdEventArgs {Id = e.CommandArgument.ToString().ToId()});
-                    break;
-            }
-        }
-
-        protected void NewTopicButton_OnClick(object sender, EventArgs e)
-        {
-            NewTopic(this, e);
-        }
-
         protected void TopicRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
@@ -98,6 +79,21 @@ namespace Weblitz.Mvp.Forum.Web
         protected void TitleLinkButton_OnCommand(object sender, CommandEventArgs e)
         {
             ShowTopic(this, new IdEventArgs {Id = e.CommandArgument.ToString().ToId()});
+        }
+
+        protected void DeleteButton_OnCommand(object sender, CommandEventArgs e)
+        {
+            Delete(this, new IdEventArgs { Id = e.CommandArgument.ToString().ToId() });
+        }
+
+        protected void EditLinkButton_OnCommand(object sender, CommandEventArgs e)
+        {
+            Edit(this, new IdEventArgs { Id = e.CommandArgument.ToString().ToId() });
+        }
+
+        protected void NewTopicLinkButton_OnCommand(object sender, CommandEventArgs e)
+        {
+            NewTopic(this, e);
         }
     }
 }

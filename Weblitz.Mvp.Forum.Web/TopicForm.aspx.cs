@@ -26,7 +26,8 @@ namespace Weblitz.Mvp.Forum.Web
                            {
                                Title = TitleTextBox.Text, 
                                Body = BodyTextBox.Text,
-                               Sticky = StickyCheckBox.Checked
+                               Sticky = StickyCheckBox.Checked,
+                               ForumId = Request["ForumId"].ToId()
                            };
             }
             set 
@@ -41,11 +42,6 @@ namespace Weblitz.Mvp.Forum.Web
         public int CurrentId
         {
             get { return Request["Id"].ToId(); }
-        }
-
-        public int ParentId
-        {
-            get { return Request["ForumId"].ToId(); }
         }
 
         public void GoToShowTopic(int id)

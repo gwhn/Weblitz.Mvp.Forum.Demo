@@ -13,7 +13,7 @@
            <dd><asp:TextBox ID="BodyTextBox" runat="server" TextMode="MultiLine"/></dd> 
         </dl>
         <dl>
-           <dt><asp:Label ID="StickyLabel" runat="server" Text="Name" AssociatedControlID="StickyCheckBox"/></dt>
+           <dt><asp:Label ID="StickyLabel" runat="server" Text="Sticky" AssociatedControlID="StickyCheckBox"/></dt>
            <dd><asp:CheckBox ID="StickyCheckBox" runat="server" /></dd> 
         </dl>
         <div class="options">

@@ -20,9 +20,9 @@
         </asp:Repeater>
         </div>
         <div class="options">
-            <asp:Button ID="EditButton" runat="server" Text="Edit" CommandName="Edit" OnCommand="OptionsButton_OnCommand" />
-            <asp:Button ID="DeleteButton" runat="server" Text="Delete" CommandName="Delete" OnCommand="OptionsButton_OnCommand" />
-            <asp:Button ID="NewTopicButton" runat="server" Text="New Topic" OnClick="NewTopicButton_OnClick" />
+            <asp:LinkButton ID="EditLinkButton" runat="server" Text="Edit" OnCommand="EditLinkButton_OnCommand"/>
+            <asp:Button ID="DeleteButton" runat="server" Text="Delete" CommandName="Delete" OnCommand="DeleteButton_OnCommand" />
+            <asp:LinkButton ID="NewTopicLinkButton" runat="server" Text="New Topic" OnCommand="NewTopicLinkButton_OnCommand"/>
         </div>
     </div>
 </asp:Content>
