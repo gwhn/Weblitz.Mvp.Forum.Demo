@@ -3,5 +3,6 @@
     public interface IPost : IEntity
     {
         string Body { get; set; }
+        ITopic Topic { get; set; }
     }
 }

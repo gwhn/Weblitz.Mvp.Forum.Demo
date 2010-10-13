@@ -20,8 +20,8 @@
                 <hr />
             </SeparatorTemplate>
         </asp:Repeater>
-        <div class="options">
-            <asp:LinkButton ID="NewForumLinkButton" runat="server" OnClick="NewForumLinkButton_OnClick">New forum</asp:LinkButton>
-        </div>
+    </div>
+    <div class="options">
+        <asp:LinkButton ID="NewForumLinkButton" runat="server" OnClick="NewForumLinkButton_OnClick">New forum</asp:LinkButton>
     </div>
 </asp:Content>

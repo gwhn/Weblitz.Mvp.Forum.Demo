@@ -45,6 +45,7 @@ namespace Weblitz.Mvp.Forum.Core.Presenters
         {
             if (_view.IsPostBack) return;
             _view.Forum = new ForumMapper().ToDisplay(_provider.Get(_view.CurrentId));
+            _view.DataBind();
         }
     }
 }

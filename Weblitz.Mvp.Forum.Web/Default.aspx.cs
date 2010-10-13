@@ -47,17 +47,13 @@ namespace Weblitz.Mvp.Forum.Web
 
         protected void ForumRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) 
-                return;
+            if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
             var data = e.Item.DataItem as IForumDisplay;
-            if (data == null) 
-                return;
+            if (data == null) return;
             var nameLink = e.Item.FindControl("NameLinkButton") as LinkButton;
-            if (nameLink != null)
-            {
-                nameLink.Text = data.Name;
-                nameLink.CommandArgument = data.Id.ToString();
-            }
+            if (nameLink == null) return;
+            nameLink.Text = data.Name;
+            nameLink.CommandArgument = data.Id.ToString();
         }
 
         protected void NameLinkButton_OnCommand(object sender, CommandEventArgs e)

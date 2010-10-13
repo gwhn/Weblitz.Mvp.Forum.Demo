@@ -2,7 +2,7 @@
 
 namespace Weblitz.Mvp.Forum.Core.Models
 {
-    internal class TopicDisplay : ITopicDisplay
+    public class TopicDisplay : ITopicDisplay
     {
         public int Id { get; set; }
         public int ForumId { get; set; }

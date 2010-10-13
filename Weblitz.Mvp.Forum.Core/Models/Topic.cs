@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Weblitz.Mvp.Forum.Core.Models
 {
@@ -8,5 +9,6 @@ namespace Weblitz.Mvp.Forum.Core.Models
         public string Title { get; set; }
         public bool Sticky { get; set; }
         public IForum Forum { get; set; }
+        public IList<IPost> Posts { get; set; }
     }
 }

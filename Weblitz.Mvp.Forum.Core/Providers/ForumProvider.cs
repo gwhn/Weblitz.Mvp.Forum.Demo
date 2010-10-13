@@ -20,7 +20,18 @@ namespace Weblitz.Mvp.Forum.Core.Providers
 
         public IForum Get(int id)
         {
-            return new Models.Forum {Id = id, Name = "Fetched Forum by Id"};
+            var forum = new Models.Forum {Id = id, Name = "Fetched Forum by Id"};
+            forum.Topics = new List<ITopic>
+                               {
+                                   new Topic
+                                       {
+                                           Id = 1423,
+                                           Forum = forum,
+                                           Sticky = true,
+                                           Title = "Mock topic title"
+                                       }
+                               };
+            return forum;
         }
 
         public bool Update(IForum entity)

@@ -22,6 +22,7 @@ namespace Weblitz.Mvp.Forum.Web
             {
                 NameLabel.Text = value.Name;
                 EditButton.CommandArgument = value.Id.ToString();
+                TopicRepeater.DataSource = value.Topics;
             }
         }
 
@@ -72,6 +73,22 @@ namespace Weblitz.Mvp.Forum.Web
         protected void NewTopicButton_OnClick(object sender, EventArgs e)
         {
             NewTopic(this, e);
+        }
+
+        protected void TopicRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
+            var data = e.Item.DataItem as ITopicDisplay;
+            if (data == null) return;
+            var titleLink = e.Item.FindControl("TitleLinkButton") as LinkButton;
+            if (titleLink == null) return;
+            titleLink.Text = data.Title;
+            titleLink.CommandArgument = data.Id.ToString();
+        }
+
+        protected void TitleLinkButton_OnCommand(object sender, CommandEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Models\ITopic.cs" />
     <Compile Include="Models\ITopicDisplay.cs" />
     <Compile Include="Models\ITopicInput.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\TopicDisplay.cs" />
     <Compile Include="Models\TopicInput.cs" />
